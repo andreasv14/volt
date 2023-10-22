@@ -1,15 +1,17 @@
 using Volt.Application;
 using Volt.Infrastructure;
+using Volt.WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services
-        .AddApplication()
-        .AddInfrastructure(builder.Configuration);
-
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration)
+        .ConfigureSwaggerAPI()
+        .ConfigureCors();
 }
 
 var app = builder.Build();
@@ -20,11 +22,10 @@ var app = builder.Build();
         app.UseSwaggerUI();
     }
 
+    app.UseCors("MyPolicy");
     app.UseHttpsRedirection();
-
+    app.UseAuthentication();
     app.UseAuthorization();
-
-    app.MapControllers();
 
     app.Run();
 }
