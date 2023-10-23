@@ -5,6 +5,9 @@ using Volt.Application.Services;
 
 namespace Volt.WebAPI.Controllers;
 
+/// <summary>
+/// 
+/// </summary>
 [AllowAnonymous]
 public class AccountController : ApiControllerBase
 {
@@ -13,8 +16,8 @@ public class AccountController : ApiControllerBase
     /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
-    [HttpPost("register")]
-    public async Task<ActionResult<AuthenticationResult>> RegisterAsync(RegisterRequest request)
+    [HttpPost("request")]
+    public async Task<ActionResult<AuthenticationResult>> RegisterAsync([FromBody] RegisterRequest request)
     {
         return Ok(await Mediator.Send(request));
     }
@@ -29,5 +32,4 @@ public class AccountController : ApiControllerBase
     {
         throw new NotImplementedException();
     }
-
 }

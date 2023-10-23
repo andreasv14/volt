@@ -50,9 +50,8 @@ public static class DependencyInjection
                 name: "MyPolicy",
                 builder =>
                 {
-                    builder.WithOrigins("https://localhost:7192")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                    builder
+                        .AllowAnyOrigin();
                 });
         });
     }
