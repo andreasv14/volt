@@ -28,8 +28,8 @@ public class AccountController : ApiControllerBase
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
     [HttpPost("login")]
-    public async Task<IActionResult> LoginAsync()
+    public async Task<ActionResult<AuthenticationResult>> LoginAsync(LoginRequest request)
     {
-        throw new NotImplementedException();
+        return Ok(await Mediator.Send(request));
     }
 }

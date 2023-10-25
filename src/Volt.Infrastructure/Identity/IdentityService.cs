@@ -20,7 +20,7 @@ public class IdentityService : IIdentityService
         _roleManager = roleManager;
     }
 
-    public async Task<AuthenticationResult> LoginAsync(string email, string username, string password)
+    public async Task<AuthenticationResult> LoginAsync(string username, string password)
     {
         var user = await _userManager.FindByNameAsync(username) ?? throw new Exception("User does not exist");
 
@@ -47,7 +47,7 @@ public class IdentityService : IIdentityService
             user.Id,
             user.FirstName,
             user.LastName,
-            email,
+            user.Email,
             token);
     }
 
